@@ -1,0 +1,41 @@
+:root {
+  color-scheme: light;
+  font-family:
+    'Inter', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #334155;
+  font-size: 17px;
+  background:
+    radial-gradient(circle at top, rgba(203, 209, 222, 0.48), transparent 32%),
+    linear-gradient(180deg, #fbfdff 0%, #f8fafc 100%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: transparent;
+  line-height: 1.65;
+  text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+#app {
+  min-height: 100vh;
+}
