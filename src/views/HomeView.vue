@@ -155,15 +155,15 @@ watch(
 <style scoped>
 .page-shell {
   min-height: 100vh;
-  padding: 40px 20px 64px;
+  padding: 34px 20px 38px;
   box-sizing: border-box;
 }
 
 .page-content {
-  width: min(980px, 100%);
+  width: min(1000px, 100%);
   margin: 0 auto;
   display: grid;
-  gap: 48px;
+  gap: 22px;
 }
 
 .page-toolbar {
@@ -176,10 +176,10 @@ watch(
   align-items: center;
   gap: 4px;
   padding: 4px;
-  border: 1px solid #dbe3f0;
+  border: 1px solid #e2e8f0;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.04);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
 }
 
 .locale-button {
@@ -195,35 +195,39 @@ watch(
 }
 
 .locale-button:hover {
-  color: #1e3a8a;
+  color: #2563eb;
 }
 
 .locale-button-active {
-  color: #1e3a8a;
+  color: #2563eb;
   background: #eff6ff;
   font-weight: 600;
 }
 
 .site-footer {
-  padding-top: 8px;
-  border-top: 1px solid #dbe3f0;
+  margin-top: 4px;
+  text-align: center;
 }
 
 .site-footer-text {
   margin: 0;
-  color: #64748b;
+  color: #94a3b8;
   line-height: 1.8;
-  font-size: 0.94rem;
+  font-size: 0.88rem;
 }
 
 .site-footer-link {
-  color: #6a7ba2;
-  text-decoration: underline;
-  text-decoration-color: #cbd1de;
-  text-underline-offset: 0.16em;
+  color: #64748b;
+  text-decoration: none;
 }
 
 .site-footer-link:hover {
   text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+  .page-shell {
+    padding: 24px 14px 28px;
+  }
 }
 </style>

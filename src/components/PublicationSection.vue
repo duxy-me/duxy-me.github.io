@@ -164,39 +164,46 @@ function downloadSelectedBibtex() {
 .publication-section {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 18px;
+  padding: 28px 32px;
+  border: 1px solid #f1f5f9;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
 }
 
 .section-heading {
   display: flex;
   align-items: end;
   justify-content: space-between;
-  gap: 20px;
+  gap: 16px;
   flex-wrap: wrap;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #e2e8f0;
 }
 
 .section-copy {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
 .section-title {
   margin: 0;
-  font-size: 1.45rem;
-  color: #1e3a8a;
+  font-size: 1.5rem;
+  color: #0f172a;
 }
 
 .section-description {
   margin: 0;
   color: #64748b;
-  font-size: 0.96rem;
+  font-size: 0.95rem;
 }
 
 .section-actions {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 10px;
   flex-wrap: wrap;
 }
 
@@ -205,47 +212,57 @@ function downloadSelectedBibtex() {
   align-items: center;
   gap: 8px;
   color: #334155;
+  font-size: 0.95rem;
 }
 
 .download-button {
-  border: 1px solid #cbd5e1;
-  border-radius: 999px;
-  padding: 10px 16px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 8px 14px;
   font: inherit;
   font-weight: 600;
-  color: #1e3a8a;
-  background: #ffffff;
+  color: #334155;
+  background: #f1f5f9;
   cursor: pointer;
-  box-shadow: none;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.download-button:hover:not(:disabled) {
+  background: #e2e8f0;
+  color: #1e293b;
 }
 
 .download-button:disabled {
-  background: #cbd5e1;
+  background: #e2e8f0;
   color: #64748b;
   cursor: not-allowed;
-  box-shadow: none;
 }
 
 .publication-list {
-  display: grid;
-  gap: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
 .publication-card {
-  border: 1px solid #dbe3f0;
-  border-radius: 20px;
-  background: #ffffff;
-  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.035);
+  padding-bottom: 16px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.publication-card:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
 }
 
 .publication-top {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
-  gap: 16px;
-  padding: 18px 20px;
+  gap: 14px;
 }
 
 .publication-select {
@@ -257,8 +274,7 @@ function downloadSelectedBibtex() {
 .publication-body {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  max-width: 46rem;
+  gap: 8px;
 }
 
 .publication-title,
@@ -268,20 +284,22 @@ function downloadSelectedBibtex() {
 }
 
 .publication-title {
-  font-size: 1.02rem;
-  color: #1f2937;
+  font-size: 1.06rem;
+  font-weight: 700;
+  color: #1e293b;
   line-height: 1.45;
 }
 
 .publication-authors {
-  color: #334155;
+  color: #475569;
   line-height: 1.72;
-  font-size: 0.97rem;
+  font-size: 0.95rem;
 }
 
 .publication-meta {
   color: #64748b;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
+  font-weight: 500;
 }
 
 .publication-links {
@@ -294,22 +312,29 @@ function downloadSelectedBibtex() {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 56px;
-  padding: 7px 11px;
-  border-radius: 999px;
-  background: #ffffff;
-  color: #6a7ba2;
-  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 8px;
+  background: #f1f5f9;
+  color: #334155;
+  font-size: 0.82rem;
+  font-weight: 600;
   text-decoration: none;
-  border: 1px solid #dbe3f0;
+  border: 1px solid transparent;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
 .link-chip:hover {
-  background: #f8fafc;
-  border-color: #cbd1de;
+  background: #e2e8f0;
+  color: #1e293b;
 }
 
 @media (max-width: 640px) {
+  .publication-section {
+    padding: 20px 22px;
+  }
+
   .publication-top {
     grid-template-columns: 1fr;
   }

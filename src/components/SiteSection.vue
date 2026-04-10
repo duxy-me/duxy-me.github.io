@@ -12,7 +12,7 @@ defineProps<{
       <li
         v-for="item in items"
         :key="item"
-        class="item-card"
+        class="item-entry"
       >
         {{ item }}
       </li>
@@ -25,29 +25,40 @@ defineProps<{
   display: flex;
   flex-direction: column;
   gap: 18px;
+  padding: 28px 32px;
+  border: 1px solid #f1f5f9;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
 }
 
 .section-title {
   margin: 0;
-  font-size: 1.45rem;
-  color: #1e3a8a;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #e2e8f0;
+  font-size: 1.5rem;
+  color: #0f172a;
 }
 
 .item-list {
-  display: grid;
-  gap: 12px;
   margin: 0;
-  padding: 0;
-  list-style: none;
+  padding-left: 24px;
+  color: #334155;
 }
 
-.item-card {
-  padding: 14px 18px;
-  border: 1px solid #dbe3f0;
-  border-radius: 16px;
-  background: #ffffff;
-  color: #334155;
-  line-height: 1.65;
-  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.03);
+.item-entry {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.item-entry + .item-entry {
+  margin-top: 8px;
+}
+
+@media (max-width: 640px) {
+  .section-card {
+    padding: 20px 22px;
+  }
 }
 </style>

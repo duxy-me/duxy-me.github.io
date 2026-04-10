@@ -2,11 +2,9 @@
   color-scheme: light;
   font-family:
     'Inter', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  color: #334155;
-  font-size: 17px;
-  background:
-    radial-gradient(circle at top, rgba(203, 209, 222, 0.48), transparent 32%),
-    linear-gradient(180deg, #fbfdff 0%, #f8fafc 100%);
+  color: #1e293b;
+  font-size: 16px;
+  background: #f8fafc;
 }
 
 * {
@@ -20,8 +18,8 @@ html {
 body {
   margin: 0;
   min-width: 320px;
-  background: transparent;
-  line-height: 1.65;
+  background: #f8fafc;
+  line-height: 1.7;
   text-rendering: optimizeLegibility;
 }
 
