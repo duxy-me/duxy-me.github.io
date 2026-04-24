@@ -15,6 +15,7 @@ const assetModules = import.meta.glob(['../content/papers/**/*', '!../content/pa
 
 export interface PublicationLinkSet {
   pdf?: string
+  doi?: string
   code?: string
   slides?: string
   detail?: string
@@ -122,6 +123,19 @@ function buildVenueDisplay(venue: string, year: number | null) {
   return `${v} ${year}`
 }
 
+/** BibTeX `doi` 字段可能不含 https://doi.org/ 前缀 */
+function normalizeDoiUrl(raw?: string) {
+  const v = raw?.trim()
+  if (!v) {
+    return undefined
+  }
+  if (/^https?:\/\//i.test(v)) {
+    return v
+  }
+  const id = v.replace(/^doi:\s*/i, '')
+  return `https://doi.org/${id}`
+}
+
 const parsedEntries = parseBibtex(rawBibtex)
 
 export const publications: Publication[] = parsedEntries.map((entry) => {
@@ -141,6 +155,7 @@ export const publications: Publication[] = parsedEntries.map((entry) => {
     note: entry.fields.note,
     links: {
       pdf: entry.fields.pdf,
+      doi: normalizeDoiUrl(entry.fields.doi),
       code: entry.fields.code,
       slides: entry.fields.slides,
       detail: hasDetail ? buildDetailPath(detailSlug) : undefined,

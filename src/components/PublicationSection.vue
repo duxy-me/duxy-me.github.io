@@ -10,6 +10,7 @@ interface PublicationSectionCopy {
   selectAll: string
   downloadBibtex: string
   detail: string
+  doi: string
 }
 
 const props = defineProps<{
@@ -127,6 +128,15 @@ function downloadSelectedBibtex() {
                 rel="noreferrer"
               >
                 PDF
+              </a>
+              <a
+                v-if="publication.links.doi"
+                class="link-chip"
+                :href="publication.links.doi"
+                target="_blank"
+                rel="noreferrer"
+              >
+                {{ copy.doi }}
               </a>
               <a
                 v-if="publication.links.code"

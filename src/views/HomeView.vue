@@ -24,6 +24,7 @@ const pageCopyByLocale = {
       selectAll: 'Select all',
       downloadBibtex: 'Download BibTeX',
       detail: 'Detail',
+      doi: 'DOI',
     },
   },
   zh: {
@@ -35,6 +36,7 @@ const pageCopyByLocale = {
       selectAll: '全选',
       downloadBibtex: '下载 BibTeX',
       detail: '详情',
+      doi: 'DOI',
     },
   },
 } satisfies Record<
@@ -48,6 +50,7 @@ const pageCopyByLocale = {
       selectAll: string
       downloadBibtex: string
       detail: string
+      doi: string
     }
   }
 >
