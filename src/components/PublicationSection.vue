@@ -28,7 +28,8 @@ const allSelected = computed(
 )
 
 function isSelfAuthor(author: string) {
-  return /xiao-?yu du/i.test(author)
+  const a = author.trim()
+  return /xiao[- ]?yu du/i.test(a) || a === '杜晓宇'
 }
 
 function toggleAll(checked: boolean) {
@@ -113,7 +114,7 @@ function downloadSelectedBibtex() {
             </p>
 
             <p class="publication-meta">
-              <span>{{ publication.venue }}</span>
+              <span>{{ publication.venueDisplay }}</span>
               <span v-if="publication.note"> · {{ publication.note }}</span>
             </p>
 
