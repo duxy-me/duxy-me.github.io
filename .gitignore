@@ -24,3 +24,27 @@ dist-ssr
 *.sw?
 
 .cursor/plans
+
+# Generated declarations (recreated by Vite plugins)
+/auto-imports.d.ts
+/components.d.ts
+
+# Local environment variables
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# Local deployment state and caches
+/.netlify/
+/.vite/
+/.cache/
+/coverage/
+*.tsbuildinfo
+
+# Temporary files and Windows metadata
+*.tmp
+*.temp
+*.bak
+Thumbs.db
+Desktop.ini

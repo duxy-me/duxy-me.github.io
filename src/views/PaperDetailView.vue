@@ -7,6 +7,18 @@ import { renderMarkdown } from '../lib/markdown'
 
 const route = useRoute()
 
+function resolveLocale() {
+  if (typeof window === 'undefined') return 'en'
+  const storedLocale = window.localStorage.getItem('site-locale')
+  if (storedLocale === 'zh' || storedLocale === 'en') return storedLocale
+  return window.navigator.language.toLowerCase().startsWith('zh') ? 'zh' : 'en'
+}
+
+const locale = resolveLocale()
+const copy = locale === 'zh'
+  ? { back: '返回首页', notFound: '未找到论文详情', empty: '当前论文暂无详情内容。' }
+  : { back: 'Back to home', notFound: 'Paper details not found', empty: 'No details are available for this publication.' }
+
 const slug = computed(() => String(route.params.slug ?? ''))
 
 const publication = computed(() =>
@@ -17,7 +29,10 @@ const detailContent = computed(() => publicationDetails[slug.value])
 
 const renderedContent = computed(() =>
   detailContent.value
-    ? renderMarkdown(detailContent.value.markdown, { assets: detailContent.value.assets })
+    ? renderMarkdown(
+      locale === 'en' ? detailContent.value.englishMarkdown ?? detailContent.value.markdown : detailContent.value.markdown,
+      { assets: detailContent.value.assets },
+    )
     : '',
 )
 </script>
@@ -29,7 +44,7 @@ const renderedContent = computed(() =>
         class="back-link"
         to="/"
       >
-        Back to home
+        {{ copy.back }}
       </RouterLink>
 
       <section class="detail-card">
@@ -44,8 +59,8 @@ const renderedContent = computed(() =>
         </template>
 
         <template v-else>
-          <h1 class="detail-title">Detail page not found</h1>
-          <p class="detail-empty">当前论文没有可用的 Markdown 详情内容。</p>
+          <h1 class="detail-title">{{ copy.notFound }}</h1>
+          <p class="detail-empty">{{ copy.empty }}</p>
         </template>
       </section>
     </div>

@@ -13,6 +13,12 @@ const assetModules = import.meta.glob(['../content/papers/**/*', '!../content/pa
   eager: true,
 }) as Record<string, string>
 
+const englishMarkdownModules = import.meta.glob('../content/papers/*/index.en.md', {
+  query: '?raw',
+  import: 'default',
+  eager: true,
+}) as Record<string, string>
+
 export interface PublicationLinkSet {
   pdf?: string
   doi?: string
@@ -36,6 +42,7 @@ export interface Publication {
 
 export interface PublicationDetail {
   markdown: string
+  englishMarkdown?: string
   assets: Record<string, string>
 }
 
@@ -178,6 +185,13 @@ export const publicationDetails = Object.entries(markdownModules).reduce<Record<
   },
   {},
 )
+
+Object.entries(englishMarkdownModules).forEach(([path, content]) => {
+  const slug = path.match(/papers\/([^/]+)\/index\.en\.md$/)?.[1]
+  if (slug && publicationDetails[slug]) {
+    publicationDetails[slug].englishMarkdown = content
+  }
+})
 
 Object.entries(assetModules).forEach(([path, assetUrl]) => {
   const match = path.match(/papers\/([^/]+)\/(.+)$/)

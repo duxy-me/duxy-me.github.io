@@ -4,18 +4,25 @@ import { RouterLink } from 'vue-router'
 
 import type { Publication } from '../data/publications'
 
-interface PublicationSectionCopy {
+export interface PublicationSectionCopy {
   title: string
   description: string
   selectAll: string
   downloadBibtex: string
   detail: string
   doi: string
+  code: string
+  slides: string
+  overview: string
+  showAll: string
+  hideAll: string
+  scholarLabel: string
 }
 
 const props = defineProps<{
   publications: Publication[]
   copy: PublicationSectionCopy
+  scholarUrl: string
 }>()
 
 const selectedMap = reactive<Record<string, boolean>>({})
@@ -62,8 +69,23 @@ function downloadSelectedBibtex() {
     <div class="section-heading">
       <div class="section-copy">
         <h2 class="section-title">{{ copy.title }}</h2>
-        <p class="section-description">{{ copy.description }}</p>
+        <p class="section-description">{{ copy.overview }}</p>
       </div>
+
+      <a class="scholar-link" :href="scholarUrl" target="_blank" rel="noopener noreferrer">
+        {{ copy.scholarLabel }} <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+
+    <details class="publication-details">
+      <summary class="publication-toggle">
+        <span class="show-all">{{ copy.showAll }}</span>
+        <span class="hide-all">{{ copy.hideAll }}</span>
+        <span class="publication-count">({{ publications.length }})</span>
+      </summary>
+
+      <div class="publication-controls">
+        <p class="section-description">{{ copy.description }}</p>
 
       <div class="section-actions">
         <label class="select-all">
@@ -84,7 +106,7 @@ function downloadSelectedBibtex() {
           {{ copy.downloadBibtex }} ({{ selectedPublications.length }})
         </button>
       </div>
-    </div>
+      </div>
 
     <ul class="publication-list">
       <li
@@ -145,7 +167,7 @@ function downloadSelectedBibtex() {
                 target="_blank"
                 rel="noreferrer"
               >
-                Code
+                {{ copy.code }}
               </a>
               <a
                 v-if="publication.links.slides"
@@ -154,7 +176,7 @@ function downloadSelectedBibtex() {
                 target="_blank"
                 rel="noreferrer"
               >
-                Slides
+                {{ copy.slides }}
               </a>
               <RouterLink
                 v-if="publication.links.detail"
@@ -168,6 +190,7 @@ function downloadSelectedBibtex() {
         </div>
       </li>
     </ul>
+    </details>
   </section>
 </template>
 
@@ -216,6 +239,54 @@ function downloadSelectedBibtex() {
   align-items: center;
   gap: 10px;
   flex-wrap: wrap;
+}
+
+.scholar-link {
+  color: #2563eb;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.scholar-link:hover {
+  text-decoration: underline;
+}
+
+.publication-toggle {
+  width: fit-content;
+  padding: 8px 0;
+  color: #2563eb;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.publication-toggle:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.publication-count {
+  margin-left: 6px;
+  color: #64748b;
+  font-weight: 400;
+}
+
+.hide-all,
+.publication-details[open] .show-all {
+  display: none;
+}
+
+.publication-details[open] .hide-all {
+  display: inline;
+}
+
+.publication-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 12px 0 20px;
 }
 
 .select-all {

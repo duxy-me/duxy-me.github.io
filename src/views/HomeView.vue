@@ -2,7 +2,7 @@
 import { computed, ref, watch } from 'vue'
 
 import ProfileSection from '../components/ProfileSection.vue'
-import PublicationSection from '../components/PublicationSection.vue'
+import PublicationSection, { type PublicationSectionCopy } from '../components/PublicationSection.vue'
 import SiteSection from '../components/SiteSection.vue'
 import { publications } from '../data/publications'
 import { siteContentByLocale, type Locale } from '../data/site'
@@ -20,11 +20,17 @@ const pageCopyByLocale = {
     emailLabel: 'Email:',
     publications: {
       title: 'Publications',
-      description: 'Publication data is loaded from BibTeX and can be exported in bulk.',
+      description: 'Select publications to download their BibTeX citations together.',
       selectAll: 'Select all',
       downloadBibtex: 'Download BibTeX',
       detail: 'Detail',
       doi: 'DOI',
+      code: 'Code',
+      slides: 'Slides',
+      overview: 'Xiaoyu Du conducts research on multimodal information retrieval and recommendation, as well as multimodal content understanding and generation. He has published papers in international journals including IEEE TPAMI, IEEE TNNLS, IEEE TVCG, IEEE TCSVT, and ACM TOIS, and at international conferences including WWW, ACL, AAAI, ACM MM, CIKM, and IJCAI. His research covers representation learning and sequential modeling in recommender systems, multimodal document understanding and intelligent question answering, and controllable image generation and editing. According to Google Scholar, as of October 9, 2026, his publications have received nearly 3,000 citations, with an h-index of 23 and an i10-index of 29.',
+      showAll: 'Recent Selected Publications',
+      hideAll: 'Hide Recent Selected Publications',
+      scholarLabel: 'Google Scholar',
     },
   },
   zh: {
@@ -32,11 +38,17 @@ const pageCopyByLocale = {
     emailLabel: '邮箱：',
     publications: {
       title: '论文发表',
-      description: '论文信息从 BibTeX 读取，可多选后批量导出。',
+      description: '可选择论文并批量下载 BibTeX 引用。',
       selectAll: '全选',
       downloadBibtex: '下载 BibTeX',
       detail: '详情',
       doi: 'DOI',
+      code: '代码',
+      slides: '报告幻灯片',
+      overview: '围绕多模态信息检索与推荐、多模态内容理解与生成开展研究，在 IEEE TPAMI、IEEE TNNLS、IEEE TVCG、IEEE TCSVT、ACM TOIS 等国际期刊，以及 WWW、ACL、AAAI、ACM MM、CIKM、IJCAI 等国际会议发表多篇论文。研究成果涵盖推荐系统中的表示学习与序列建模、多模态文档理解与智能问答、可控图像生成与编辑等方向。根据 Google Scholar 数据，截至 2026 年 10 月 9 日，论文累计被引用近 3000 次，h 指数为 23，i10 指数为 29。',
+      showAll: '近期代表作',
+      hideAll: '收起近期代表作',
+      scholarLabel: 'Google Scholar',
     },
   },
 } satisfies Record<
@@ -44,14 +56,7 @@ const pageCopyByLocale = {
   {
     localeLabel: string
     emailLabel: string
-    publications: {
-      title: string
-      description: string
-      selectAll: string
-      downloadBibtex: string
-      detail: string
-      doi: string
-    }
+    publications: PublicationSectionCopy
   }
 >
 
@@ -116,19 +121,35 @@ watch(
         :email-label="pageCopy.emailLabel"
       />
 
-      <PublicationSection
-        :publications="publications"
-        :copy="pageCopy.publications"
+      <SiteSection
+        :title="siteContent.projectsTitle"
+        :items="siteContent.projects"
       />
 
       <SiteSection
-        :title="siteContent.professionalServicesTitle"
-        :items="siteContent.professionalServices"
+        :title="siteContent.awardsTitle"
+        :items="siteContent.awards"
+      />
+
+      <SiteSection
+        :title="siteContent.supervisionTitle"
+        :items="siteContent.supervision"
+      />
+
+      <PublicationSection
+        :publications="publications"
+        :copy="pageCopy.publications"
+        scholar-url="https://scholar.google.com/citations?user=vs_MX8kAAAAJ"
       />
 
       <SiteSection
         :title="siteContent.teachingTitle"
         :items="siteContent.teaching"
+      />
+
+      <SiteSection
+        :title="siteContent.professionalServicesTitle"
+        :items="siteContent.professionalServices"
       />
 
       <footer class="site-footer">
